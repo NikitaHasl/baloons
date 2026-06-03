@@ -1,3 +1,24 @@
+$color-gray: #777777
+$color-black: #000000
+$color-white: #ffffff
+$color-white-gray: #F7F7F7
+$color-brown: #855120
+
+$grid-width: 114rem
+$margin-vertical-80: 8rem
+$gutter-horizontal: 6rem
+
+@mixin link-decore($color)
+  text-decoration: none
+  text-transform: uppercase
+  display: inline-block
+  color: $color
+
+@mixin clear-fix
+  &::after
+    content: ""
+    display: table
+    clear: both
 *
   margin: 0
   padding: 0
@@ -9,11 +30,11 @@ body
   font-weight: 400
   font-size: 1.6rem
   letter-spacing: .2rem
-  color: #777777
+  color: $color-gray
   padding: 5rem
-  background-color: white
+  background-color: $color-white
 .container
-  background-color: #F7F7F7
+  background-color: $color-white-gray
 .header
   position: relative
   height: 95vh
@@ -33,7 +54,7 @@ body
     width: 100%
     text-align: center
 .title-first
-  color: #FFFFFF
+  color: $color-white
   margin-bottom: 6.5rem
   &__main
     font-weight: 800
@@ -55,14 +76,11 @@ body
     display: block
 .btn
   &:link, &:visited
-    color: #777777
-    background-color: #fff
+    @include link-decore($color-gray)
+    background-color: $color-white
     padding: 1.5rem 4rem
     border-radius: 5rem
-    text-decoration: none
-    text-transform: uppercase
-    display: inline-block
-    transition: all .5s
+    transition: all .3s
 
   &:hover
     transform: translateY(-.3rem)
@@ -87,3 +105,193 @@ body
     rotate: 180deg
   100%
     rotate: 360deg
+
+[class^="col-"]
+    float: left
+    &:not(:last-child)
+      margin-right: $gutter-horizontal
+
+.row
+  max-width: $grid-width
+  margin: 0 auto
+  @include clear-fix
+  &:not(:last-child)
+    margin-bottom: $margin-vertical-80
+
+.col-1-of-2
+  width: calc((100% - #{$gutter-horizontal}) / 2)
+
+.col-1-of-3
+  width: calc((100% - #{$gutter-horizontal * 2}) / 3)
+
+.col-2-of-3
+  width: calc(((100% - #{$gutter-horizontal * 2}) / 3) * 2 + #{$gutter-horizontal})
+
+.col-1-of-4
+  width: calc((100% - #{$gutter-horizontal * 3}) / 4)
+
+.col-2-of-4
+  width: calc(((100% - #{$gutter-horizontal * 3}) / 4) * 2 + #{$gutter-horizontal})
+
+.col-3-of-4
+  width: calc(((100% - #{$gutter-horizontal * 3}) / 4) * 3 + #{$gutter-horizontal * 2})
+
+.section-about
+  padding-top: 8rem
+
+.title-secondary
+  font-size: 3.6rem
+  letter-spacing: 1rem
+  font-weight: 800
+  text-transform: uppercase
+  background: linear-gradient(90deg, rgba(186, 133, 84, 0.7) 0.03%, rgba(1, 1, 1, 0.7) 99.94%)
+  background-clip: text
+  color: transparent
+  transition: all .4s
+  backface-visibility: hidden
+  &:hover
+    transform: skewY(2deg) skewX(15deg)
+    text-shadow: 0 .4rem .4rem rgba($color-black, .25)
+
+.text-align-center
+  text-align: center
+
+.margin-bot-80px
+  margin-bottom: 8rem
+
+.title-third
+  font-size: 2rem
+  letter-spacing: .2rem
+  font-weight: 700
+  text-transform: uppercase
+
+.paragraph
+  font-size: 1.6rem
+  letter-spacing: .2rem
+  font-weight: 400
+  line-height: 140%
+
+.margin-bot-50px
+  margin-bottom: 5rem
+
+.margin-bot-30px
+  margin-bottom: 3rem
+
+.margin-bot-10px
+  margin-bottom: 1rem
+
+.btn-text
+  &:link, &:visited
+    font-size: 1.6rem
+    letter-spacing: .2rem
+    font-weight: 700
+    text-decoration: none
+    color: $color-gray
+    padding: 1rem
+    border-bottom: .1rem solid $color-brown
+    transition: all .5s
+  &:hover
+    background-color: $color-brown
+    color: $color-white
+  &:active
+
+.composition
+  position: relative
+  &__photo
+    position: absolute
+    width: 55%
+    z-index: 10
+    transition: all .3s
+    &_n1
+      top: 0
+      left: 0
+    &_n2
+      top: 6rem
+      right: 0
+    &_n3
+      top: 12rem
+      left: 10rem
+    &:hover
+      transform: scale(1.1)
+      z-index: 20
+
+.section-adventure
+  padding: 21rem 0
+  background: linear-gradient(90deg, rgba(186, 133, 84, 0.7) 0.03%, rgba(1, 1, 1, 0.7) 99.94%), url(../img/section-adventure.jpg) center / cover no-repeat
+  transform: skewY(5deg)
+  & > *
+    transform: skewY(-5deg)
+.adventure-card
+  padding: 2.5rem
+  background-color: rgba($color-white, .8)
+  border-radius: .5rem
+  text-align: center
+  transition: all .3s
+  &:hover
+    transform: translateY(-1.4rem) scale(1.03)
+  &__icon
+    font-size: 6rem
+    background: linear-gradient(90deg, rgba(186, 133, 84, 0.7) 0.03%, rgba(1, 1, 1, 0.7) 99.94%)
+    background-clip: text
+    color: transparent
+    display: inline-block
+
+.card-tour
+  height: 50rem
+  perspective: 150rem
+  position: relative
+  &__side
+    transition: all .6s
+    height: 50rem
+    color: $color-white
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    backface-visibility: hidden
+    &_front
+    &_back
+      transform: rotateY(-180deg)
+      background: linear-gradient(135deg, rgba(245, 139, 40, 0.7) 0.03%, rgba(85, 45, 8, 0.7) 99.94%)
+
+  &:hover &__side_front
+    transform: rotateY(180deg)
+  &:hover &__side_back
+    transform: rotateY(0deg)
+  &__img
+    background: $color-brown
+    clip-path: polygon(100% 0%, 100% 100%, 0% 80%, 0% 0%)
+    height: 21rem
+    background-blend-mode: hard-light
+    & img
+      width: 100%
+  &__title
+    font-size: 2.8rem
+    letter-spacing: .2rem
+    font-weight: 300
+    text-transform: uppercase
+    text-align: right
+    position: absolute
+    top: 17rem
+    right: 0
+  &__span
+    background: linear-gradient(90deg, rgb(245, 139, 40), rgb(85, 45, 8))
+    padding: 1rem 2rem
+    &_1
+
+    &_2
+      position: absolute
+      top: 4rem
+      right: 0
+  &__description
+    ul
+      list-style: none
+      margin: 0 auto
+      li
+        font-size: 1.6rem
+        letter-spacing: .2rem
+        color: $color-gray
+        text-align: center
+        border-bottom: 1px solid $color-gray
+        &:not(:last-child)
+          margin-bottom: 2rem
