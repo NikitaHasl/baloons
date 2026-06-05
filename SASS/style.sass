@@ -35,6 +35,8 @@ body
   background-color: $color-white
 .container
   background-color: $color-white-gray
+  position: relative
+  z-index: 0
 .header
   position: relative
   height: 95vh
@@ -75,13 +77,17 @@ body
     text-transform: lowercase
     display: block
 .btn
-  &:link, &:visited
+  &, &:link, &:visited
     @include link-decore($color-gray)
     background-color: $color-white
     padding: 1.5rem 4rem
     border-radius: 5rem
     transition: all .3s
-
+    border: none
+  &_brown
+    &, &:link, &:visited
+      background-color: $color-brown
+      color: $color-white
   &:hover
     transform: translateY(-.3rem)
   &:active
@@ -149,6 +155,8 @@ body
   color: transparent
   transition: all .4s
   backface-visibility: hidden
+  &_white
+    color: $color-white
   &:hover
     transform: skewY(2deg) skewX(15deg)
     text-shadow: 0 .4rem .4rem rgba($color-black, .25)
@@ -249,6 +257,8 @@ body
     left: 0
     width: 100%
     backface-visibility: hidden
+    border-radius: .3rem
+    overflow: hidden
     &_front
     &_back
       transform: rotateY(-180deg)
@@ -278,7 +288,6 @@ body
     background: linear-gradient(90deg, rgb(245, 139, 40), rgb(85, 45, 8))
     padding: 1rem 2rem
     &_1
-
     &_2
       position: absolute
       top: 4rem
@@ -287,11 +296,168 @@ body
     ul
       list-style: none
       margin: 0 auto
+      width: 75%
+      text-align: center
       li
         font-size: 1.6rem
         letter-spacing: .2rem
         color: $color-gray
-        text-align: center
         border-bottom: 1px solid $color-gray
         &:not(:last-child)
           margin-bottom: 2rem
+  &__back-info
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+  &__text
+    margin-bottom: 8rem
+    letter-spacing: .2rem
+    text-transform: uppercase
+    text-align: center
+    color: $color-white
+    &_header
+      font-weight: 300
+      font-size: 1.6rem
+    &_price
+      font-size: 6rem
+      font-weight: 500
+.feedback
+  padding: 8rem 0rem
+  backface-visibility: hidden
+  position: relative
+.feedback-card
+  width: 75%
+  background-color: rgba($color-white, 0.75)
+  margin: 0 auto
+  padding: 6rem
+  transform: skewX(-30deg)
+  backface-visibility: hidden
+  > *
+    transform: skewX(30deg)
+
+  &__img
+    width: 15rem
+    height: 15rem
+    background: red
+    border-radius: 20rem
+    float: left
+    margin-right: 4rem
+    shape-outside: circle(50% at 50% 50%)
+    overflow: hidden
+    position: relative
+
+    img
+      width: 100%
+      transform: scale(1.15)
+      transition: all .5s
+  &__name
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, 0%)
+    opacity: 0
+    font-size: 2.4rem
+    letter-spacing: .2rem
+    text-align: center
+    font-weight: 400
+    color: $color-white
+  &:hover &__name
+    transform: translate(-50%, -50%)
+    opacity: 1
+  &:hover img
+    transform: scale(1)
+    filter: blur(.3rem) brightness(70%)
+.bg-video
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: -2
+  object-fit: cover
+.bg-cover
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: -1
+  background: linear-gradient(90deg, rgba($color-brown, .7), rgba($color-black, .7))
+
+.section-book
+  padding: 10rem
+  background: linear-gradient(90deg, $color-brown, $color-black)
+
+.book
+  height: 50rem
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.8) 60%, rgba(238, 164, 104, 0.8) 60%, rgba(97, 47, 0, 0.8) 100%), url(../img/bg-form.jpg) center / cover no-repeat
+
+.form
+  width: 60%
+  padding-top: 5rem
+  padding-left: 5rem
+  &__group:not(:last-child)
+    margin-bottom: 2rem
+  &__group:nth-child(4)
+    margin-bottom: 4rem
+  &__input
+    font-size: 1.6rem
+    letter-spacing: .2rem
+    font-weight: 400
+    color: $color-black
+    padding: 2rem 0rem 2rem 2rem
+    background-color: $color-white
+    border: none
+    border-bottom: .2rem solid transparent
+    border-radius: .5rem
+    width: 50%
+    &:focus
+      outline: none
+      border-bottom: .2rem solid #66d763
+    &:focus:invalid
+      border-bottom: .2rem solid #d76363
+  &__input:placeholder-shown + &__label
+    opacity: 0
+    visibility: hidden
+    transform: translateY(-3rem)
+  &__label
+    font-size: 1.6rem
+    letter-spacing: .2rem
+    font-weight: 400
+    display: block
+    padding-top: 1rem
+    padding-left: 1.5rem
+    transition: all .6s
+  &__group-radio
+    display: inline-block
+    width: 40%
+  &__label-radio
+    cursor: pointer
+    position: relative
+    padding-left: 4rem
+  &__input-radio
+    display: none
+  &__button-radio
+    width: 3rem
+    height: 3rem
+    border-radius: 50%
+    border: .5rem solid $color-brown
+    display: block
+    position: absolute
+    top: -0.5rem
+    &::after
+      content: ""
+      width: 1.5rem
+      height: 1.5rem
+      border-radius: 50%
+      background-color: $color-brown
+      display: block
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      opacity: 0
+      transition: .5s
+  &__input-radio:checked ~ &__label-radio &__button-radio::after
+    opacity: 1
